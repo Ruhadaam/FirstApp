@@ -1,11 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Image, TextInput, Pressable } from "react-native"; // Button bileşenini ekledik
+import { Button } from 'react-native-paper';
 
 export default function App() {
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [phone, setPhone] = useState("");
+
+const [result, setResult] = useState('')
+  
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text>WELCOME {result}</Text>
+      <TextInput
+        style={styles.inputStyle}
+        onChangeText={setName}
+        placeholder="Ad"
+      />
+
+      <TextInput 
+      style={styles.inputStyle}
+       placeholder="Soyad"
+       onChangeText={setSurname}
+       
+       />
+
+      <TextInput
+        style={styles.inputStyle}
+        keyboardType="phone-pad"
+        placeholder="Telefon"
+        onChangeText={setPhone}
+      />
+
+      <TextInput
+        style={styles.inputStyle}
+        keyboardType="email-address"
+        placeholder="E-posta adresinizi giriniz..."
+      />
+      <TextInput
+        style={styles.inputStyle}
+        placeholder="Şifrenizi Giriniz..."
+        secureTextEntry
+      />
+
+     
+       <Button mode="contained" style={styles.button} onPress={() => setResult(name + " " + surname)} >
+    Kaydet
+  </Button>
+  
     </View>
   );
 }
@@ -13,8 +56,22 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ededed",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
+  inputStyle: {
+    borderWidth: 1,
+    width: "80%",
+    borderRadius: 10,
+    height: 50,
+    textAlign: "center",
+    marginVertical: 10,
+    fontWeight: "bold",
+  },
+  button:{
+    width:"80%",
+    marginVertical:30,
+  }
 });
