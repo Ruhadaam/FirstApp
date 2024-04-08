@@ -1,77 +1,23 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Image, TextInput, Pressable } from "react-native"; // Button bileşenini ekledik
-import { Button } from 'react-native-paper';
+import { View, Text } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import SecondPage from "./src/secondPage"
+import Home from "./src/home"
 
-export default function App() {
-  const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
-  const [phone, setPhone] = useState("");
+const Stack = createStackNavigator();
 
-const [result, setResult] = useState('')
-  
-
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>WELCOME {result}</Text>
-      <TextInput
-        style={styles.inputStyle}
-        onChangeText={setName}
-        placeholder="Ad"
-      />
-
-      <TextInput 
-      style={styles.inputStyle}
-       placeholder="Soyad"
-       onChangeText={setSurname}
-       
-       />
-
-      <TextInput
-        style={styles.inputStyle}
-        keyboardType="phone-pad"
-        placeholder="Telefon"
-        onChangeText={setPhone}
-      />
-
-      <TextInput
-        style={styles.inputStyle}
-        keyboardType="email-address"
-        placeholder="E-posta adresinizi giriniz..."
-      />
-      <TextInput
-        style={styles.inputStyle}
-        placeholder="Şifrenizi Giriniz..."
-        secureTextEntry
-      />
-
-     
-       <Button mode="contained" style={styles.button} onPress={() => setResult(name + " " + surname)} >
-    Kaydet
-  </Button>
-  
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home"
+        screenOptions={{ headerShown: false }}
+      >
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SecondPage" component={SecondPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ededed",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  inputStyle: {
-    borderWidth: 1,
-    width: "80%",
-    borderRadius: 10,
-    height: 50,
-    textAlign: "center",
-    marginVertical: 10,
-    fontWeight: "bold",
-  },
-  button:{
-    width:"80%",
-    marginVertical:30,
-  }
-});
+export default App;
